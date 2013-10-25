@@ -10,13 +10,18 @@ def calculate(a, q):
             return False
         else:
             powers.append(result)
-    print(powers)    
+
     return True
 
 try:
     a = int(input("Enter a: "))
     q = int(input("Enter q: "))
+    result = calculate(a,q)
 
-    print(calculate(a, q))
+    if result:
+        print('{0} is a primitive root mod {1}'.format(a, q))
+    else:
+        print('{0} is NOT a primitive root mod {1}'.format(a,q))
+
 except:
     print("Error")

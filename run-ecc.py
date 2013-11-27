@@ -1,4 +1,3 @@
-import euclidextended
 import ecc
 
 def enterNumber(text):

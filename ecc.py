@@ -1,3 +1,5 @@
+import euclidextended
+
 class EccCalculator:
     def __init__(self, a, b, p):
         self.a = a
@@ -6,7 +8,7 @@ class EccCalculator:
 
     def calculateLambda(self, pointP, pointQ):
         if(pointP.x == pointQ.x and pointP.y == pointQ.y):
-            firstPart = (3 * pointP.x**2 + a)
+            firstPart = (3 * pointP.x**2 + self.a)
             secondPart = (2 * pointP.y)
         else:
             firstPart = (pointQ.y - pointP.y)
@@ -70,4 +72,5 @@ class Point:
         self.x = x
         self.y = y
 
-
+if __name__ == "__main__":
+    print('You cannot run this module')

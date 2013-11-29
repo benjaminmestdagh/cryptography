@@ -2,15 +2,15 @@ import ecc
 
 def enterNumber(text):
     number = input(text)
-    if(number.isdigit()):
+    try:
         return int(number)
-    else:
+    except:
         raise ValueError('Please enter a number!')
 
 def printMenu():
     choice = None
     while(choice == None or choice > 2 or choice < 0):
-        print('\n0: Exit\n1: Show all points in the curve\n2: Calculate multiplies')
+        print('\n0: Exit\n1: Show all points in the curve\n2: Calculate multiples')
         choice = enterNumber('Make your choice: ')
 
     return choice
@@ -40,7 +40,7 @@ try:
             y = enterNumber('Enter y: ')
        
             try:
-                print('\nThe multiplies:')
+                print('\nThe multiples:')
                 print('\n'.join(calculator.calculateG(n, x, y)))
             except ValueError as e:
                 print(e)

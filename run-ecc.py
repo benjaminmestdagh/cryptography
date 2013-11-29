@@ -9,11 +9,32 @@ def enterNumber(text):
 
 def printMenu():
     choice = None
-    while(choice == None or choice > 3 or choice < 0):
-        print('\n0: Exit\n1: Show all points in the curve\n2: Calculate multiples\n3: Sum of two points')
+    while(choice == None or choice > 4 or choice < 0):
+        print("\n0: Exit"
+              "\n1: Show all points in the curve"
+              "\n2: Calculate multiples"
+              "\n3: Addition of two points"
+              "\n4: Subtraction of two points")
         choice = enterNumber('Make your choice: ')
 
     return choice
+
+def doAdditionOrSubtraction(subtraction = False):
+    x1 = enterNumber('Enter first x: ')
+    y1 = enterNumber('Enter first y: ')
+    x2 = enterNumber('Enter second x: ')
+    y2 = enterNumber('Enter second y: ')
+
+    if(subtraction):
+        y2 = p - y2;
+
+    try:
+        print('\nThe sum of the points ({},{}) and ({},{}):'.format(x1,y1,x2,y2))
+        point = calculator.calculateR(ecc.Point(x1,y1), ecc.Point(x2,y2))
+        print('({},{})'.format(point.x, point.y))
+    except ValueError as e:
+        print(e)
+
 
 ## Starting point for the application ##
 try:
@@ -44,19 +65,11 @@ try:
                 print('\n'.join(calculator.calculateG(n, x, y)))
             except ValueError as e:
                 print(e)
+        elif(choice == 3):
+            doAdditionOrSubtraction()
         else:
-            x1 = enterNumber('Enter first x: ')
-            y1 = enterNumber('Enter first y: ')
-            x2 = enterNumber('Enter second x: ')
-            y2 = enterNumber('Enter second y: ')
-
-            try:
-                print('\nThe sum of the points ({},{}) and ({},{}):'.format(x1,y1,x2,y2))
-                point = calculator.calculateR(ecc.Point(x1,y1), ecc.Point(x2,y2))
-                print('({},{})'.format(point.x, point.y))
-            except ValueError as e:
-                print(e)
-
+            doAdditionOrSubtraction(True)
+            
         choice = printMenu()
     else:
         print('Bye!')

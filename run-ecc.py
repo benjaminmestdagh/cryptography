@@ -9,8 +9,8 @@ def enterNumber(text):
 
 def printMenu():
     choice = None
-    while(choice == None or choice > 2 or choice < 0):
-        print('\n0: Exit\n1: Show all points in the curve\n2: Calculate multiples')
+    while(choice == None or choice > 3 or choice < 0):
+        print('\n0: Exit\n1: Show all points in the curve\n2: Calculate multiples\n3: Sum of two points')
         choice = enterNumber('Make your choice: ')
 
     return choice
@@ -34,7 +34,7 @@ try:
             results = calculator.calculateAllPoints()
             for point in results:
                 print('({},{})'.format(point.x, point.y))
-        else:
+        elif(choice == 2):
             n = enterNumber('Enter n: ')
             x = enterNumber('Enter x: ')
             y = enterNumber('Enter y: ')
@@ -42,6 +42,18 @@ try:
             try:
                 print('\nThe multiples:')
                 print('\n'.join(calculator.calculateG(n, x, y)))
+            except ValueError as e:
+                print(e)
+        else:
+            x1 = enterNumber('Enter first x: ')
+            y1 = enterNumber('Enter first y: ')
+            x2 = enterNumber('Enter second x: ')
+            y2 = enterNumber('Enter second y: ')
+
+            try:
+                print('\nThe sum of the points ({},{}) and ({},{}):'.format(x1,y1,x2,y2))
+                point = calculator.calculateR(ecc.Point(x1,y1), ecc.Point(x2,y2))
+                print('({},{})'.format(point.x, point.y))
             except ValueError as e:
                 print(e)
 

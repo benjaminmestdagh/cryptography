@@ -129,6 +129,10 @@ def getNextKeys(key)
     return [key1, key2]
 end 
 
+def printMessage(message, result)
+    puts "%s:\n\t%016b\n\t%04x" % [message, result, result]
+end
+
 
 ### Main starting point ###
 
@@ -138,8 +142,8 @@ key     = 0b1010011100111011
 puts "S-AES Algorithm"
 puts "---------------\n"
 
-puts "Message:\n\t%016b\n\t%04x" % [message, message]
-puts "Key:\n\t%016b\n\t%04x" % [key, key]
+printMessage("Message", message)
+printMessage("Key", key)
 
 state = Array.new(2) { Array.new(2) }
 putInMatrix(message, state)
@@ -148,18 +152,32 @@ keyMatrix = Array.new(2) { Array.new(2) }
 putInMatrix(key, keyMatrix)
 
 addKey(state, keyMatrix)
+printMessage("Add key", numberFromMatrix(state))
+
 substituteNibbles(state)
+printMessage("Substitute nibbles", numberFromMatrix(state))
+
 shiftRow(state)
+printMessage("Shift row", numberFromMatrix(state))
+
 mixColumns(state)
+printMessage("Mix columns", numberFromMatrix(state))
 
 nextKeys = getNextKeys(key)
+printMessage("Key 2", nextKeys[0])
+printMessage("Key 3", nextKeys[1])
+
 putInMatrix(nextKeys[0], keyMatrix)
 addKey(state, keyMatrix)
+printMessage("Add key", numberFromMatrix(state))
+
 substituteNibbles(state)
+printMessage("Substitute nibbles", numberFromMatrix(state))
 shiftRow(state)
+printMessage("Shift row", numberFromMatrix(state))
 
 putInMatrix(nextKeys[1], keyMatrix)
 addKey(state, keyMatrix)
 
-result = numberFromMatrix(state)
-puts "Result:\n\t%016b\n\t%04x" % [result, result]
+printMessage("Result", numberFromMatrix(state))
+
